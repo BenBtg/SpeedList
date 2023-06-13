@@ -1,4 +1,6 @@
-﻿namespace SpeedList;
+﻿using SpeedList.Views;
+
+namespace SpeedList;
 
 public partial class MainPage : ContentPage
 {
@@ -10,15 +12,8 @@ public partial class MainPage : ContentPage
 	}
 
 	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    {
+        Navigation.PushAsync(new MembersPage());
+    }
 }
 

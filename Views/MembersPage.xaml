@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:SpeedList.ViewModels"
+             x:Class="SpeedList.Views.MembersPage"
+             Title="MembersPage">
+    <ContentPage.BindingContext>
+        <viewModels:MembersViewModel />
+    </ContentPage.BindingContext>
+    <CollectionView ItemsSource="{Binding Members}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Padding="10">
+                    <Image Source="{Binding ThumbnailUrl}" WidthRequest="50" HeightRequest="50" Aspect="AspectFill" />
+                    <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="{Binding Email}" FontSize="14" />
+                    <Label Text="{Binding Phone}" FontSize="14" />
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

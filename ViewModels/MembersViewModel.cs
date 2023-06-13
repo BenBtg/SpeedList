@@ -18,9 +18,10 @@ namespace SpeedList.ViewModels
         private List<Member> _members;
 
 
-        public MembersViewModel(IMembersService _memberService)
+        public MembersViewModel()
         {
-            _memberService = _memberService;
+            _memberService = new MembersService();
+            LoadContacts();
         }
 
         public void LoadContacts()
