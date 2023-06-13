@@ -35,6 +35,8 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
+
+
         </VerticalStackLayout>
     </ScrollView>
 
