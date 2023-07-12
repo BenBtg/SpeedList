@@ -7,26 +7,39 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using SpeedList.Models;
 using SpeedList.Services;
+using System.Collections.ObjectModel;
 
 namespace SpeedList.ViewModels
 {
-    public partial class MembersViewModel : ObservableObject
+    public partial class MembersViewModel : BaseViewModel
     {
         private readonly IMembersService _memberService;
-
+        
         [ObservableProperty]
-        private List<Member> _members;
-
+        private ObservableCollection<Member> _members = new ObservableCollection<Member>();
 
         public MembersViewModel()
         {
-            _memberService = new MembersService();
+            _memberService = new MembersService();     
+        }
+
+        override public void OnAppearing()
+        {
+            base.OnAppearing();
             LoadContacts();
         }
 
         public void LoadContacts()
         {
-            Members = _memberService.GetList();
+            Task.Run(() =>
+            {
+                Members.Clear();
+                var memberList = _memberService.GetList();
+                foreach (var member in memberList)
+                {
+                    Members.Add(member);
+                }
+            });            
         }
     }
 }
