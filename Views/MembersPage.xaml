@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SpeedList.ViewModels"
              xmlns:local="clr-namespace:SpeedList.Views"
+             xmlns:models="clr-namespace:SpeedList.Models"
              x:Class="SpeedList.Views.MembersPage"
              Title="MembersPage">
     <ContentPage.BindingContext>
         <viewModels:MembersViewModel />
     </ContentPage.BindingContext>
-    <CollectionView ItemsSource="{Binding Members}" Margin="8">
+    <CollectionView ItemsSource="{Binding Members, Mode=OneTime}" ItemSizingStrategy="MeasureFirstItem" Margin="8">
         <CollectionView.ItemTemplate>
-            <DataTemplate>
+            <DataTemplate x:DataType="models:Member">
                 <Grid ColumnDefinitions="50,8,*" RowDefinitions="*,*" RowSpacing="10">
                     <Image Grid.Column="0" Grid.RowSpan="2" Source="{Binding ThumbnailUrl}" />
                     <Label Grid.Column="2" Grid.Row="0" Text="{Binding Name}" FontSize="15" FontAttributes="Bold" VerticalTextAlignment="Center" />
