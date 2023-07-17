@@ -12,6 +12,6 @@ public class MembersService : IMembersService
 {
     public List<Member> GetList()
     {
-        return MemberDataGenerator.GenerateList();
+        return MemberDataGenerator.GenerateList(100);
     }
 }
