@@ -9,9 +9,10 @@ public partial class MainPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
+	private async void OnCounterClicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MembersPage());
+        //Navigation.PushAsync(new MembersPage());
+        await Shell.Current.GoToAsync($"//MembersPage");
     }
 }
 
