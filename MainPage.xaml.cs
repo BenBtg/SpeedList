@@ -11,8 +11,7 @@ public partial class MainPage : ContentPage
 
 	private async void OnCounterClicked(object sender, EventArgs e)
     {
-        //Navigation.PushAsync(new MembersPage());
-        await Shell.Current.GoToAsync($"//MembersPage");
+        await Shell.Current.GoToAsync(nameof(MembersPage));
     }
 }
 

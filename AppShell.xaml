@@ -9,12 +9,12 @@
 
     
     <ShellContent
+        Shell.NavBarIsVisible="true"
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
     <ShellContent Title="Members" 
-                  ContentTemplate="{DataTemplate views:MembersPage}" 
-                  Route="MembersPage" />
+                  ContentTemplate="{DataTemplate views:MembersPage}"/>
 
 </Shell>

@@ -5,12 +5,12 @@ namespace SpeedList.Services;
 
 public interface IMembersService
 {
-    List<Member> GetList();
+    List<Member> GetMembers();
 }
 
 public class MembersService : IMembersService
 {
-    public List<Member> GetList()
+    public List<Member> GetMembers()
     {
         return MemberDataGenerator.GenerateList(100);
     }

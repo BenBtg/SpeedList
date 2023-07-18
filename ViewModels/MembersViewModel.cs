@@ -14,13 +14,13 @@ namespace SpeedList.ViewModels
     public partial class MembersViewModel : BaseViewModel
     {
         private readonly IMembersService _memberService;
-        
+
         [ObservableProperty]
         private ObservableCollection<Member> _members = new ObservableCollection<Member>();
 
         public MembersViewModel()
         {
-            _memberService = new MembersService();     
+           _memberService = new MembersService();     
         }
 
         override public void OnAppearing()
@@ -30,16 +30,24 @@ namespace SpeedList.ViewModels
         }
 
         public void LoadContacts()
-        {
-            Task.Run(() =>
-            {
-                Members.Clear();
-                var memberList = _memberService.GetList();
-                foreach (var member in memberList)
+        {            
+            Task.Run(async () =>
+            {                
+                try
                 {
-                    Members.Add(member);
+                    Members.Clear();
+                    var memberList = _memberService.GetMembers();
+                    foreach (var member in memberList)
+                    {
+                        Members.Add(member);
+                    }
                 }
-            });            
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+                }                                
+            });         
         }
     }
 }
