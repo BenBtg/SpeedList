@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:BasePage
+       x:Class="SpeedList.Views.MembersPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:SpeedList.ViewModels"
              xmlns:local="clr-namespace:SpeedList.Views"
              xmlns:models="clr-namespace:SpeedList.Models"
-             x:Class="SpeedList.Views.MembersPage"
-             Title="MembersPage">
-    <ContentPage.BindingContext>
-        <viewModels:MembersViewModel />
-    </ContentPage.BindingContext>
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="True"
+             Title="MembersPage"
+             x:DataType="viewModels:MembersViewModel">
+
     <CollectionView ItemsSource="{Binding Members, Mode=OneTime}" ItemSizingStrategy="MeasureFirstItem" Margin="8">
         <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="models:Member">

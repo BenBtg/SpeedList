@@ -1,53 +1,45 @@
-﻿using CommunityToolkit.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CommunityToolkit.Mvvm.ComponentModel;
-using SpeedList.Models;
-using SpeedList.Services;
-using System.Collections.ObjectModel;
+﻿namespace SpeedList.ViewModels;
 
-namespace SpeedList.ViewModels
+[QueryProperty(nameof(Length), nameof(Length))]
+public partial class MembersViewModel : BaseViewModel
 {
-    public partial class MembersViewModel : BaseViewModel
+    private readonly IMembersService _memberService;
+
+    [ObservableProperty]
+    private ObservableCollection<Member> _members = new ObservableCollection<Member>();
+
+    [ObservableProperty]
+    int length;
+
+    public MembersViewModel(IMembersService membersService)
     {
-        private readonly IMembersService _memberService;
+        _memberService = membersService;
+    }
 
-        [ObservableProperty]
-        private ObservableCollection<Member> _members = new ObservableCollection<Member>();
+    override public void OnAppearing()
+    {
+        base.OnAppearing();
+        LoadContacts();
+    }
 
-        public MembersViewModel()
+    public void LoadContacts()
+    {
+        Task.Run(async () =>
         {
-           _memberService = new MembersService();     
-        }
-
-        override public void OnAppearing()
-        {
-            base.OnAppearing();
-            LoadContacts();
-        }
-
-        public void LoadContacts()
-        {            
-            Task.Run(async () =>
-            {                
-                try
+            try
+            {
+                Members.Clear();
+                var memberList = _memberService.GetMembers(Length);
+                foreach (var member in memberList)
                 {
-                    Members.Clear();
-                    var memberList = _memberService.GetMembers();
-                    foreach (var member in memberList)
-                    {
-                        Members.Add(member);
-                    }
+                    Members.Add(member);
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
-                }                                
-            });         
-        }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+            }
+        });
     }
 }

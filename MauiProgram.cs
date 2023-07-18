@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SpeedList.ViewModels;
+using SpeedList.Views;
 
 namespace SpeedList;
 
@@ -20,7 +22,11 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+        builder.Services.AddSingleton<IMembersService>(new MembersService());
+        builder.Services.AddSingleton<MainPage>();
 
-		return builder.Build();
+        builder.Services.AddTransient<MembersViewModel>();
+        builder.Services.AddTransient<MembersPage>();
+        return builder.Build();
 	}
 }
